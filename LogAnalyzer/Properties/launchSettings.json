@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LogAnalyzer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "LogAnalyzer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
