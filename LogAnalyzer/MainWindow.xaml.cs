@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -63,13 +65,29 @@ namespace LogAnalyzer
                 string appName = appNames[i];
                 AppendLog($"Generando informe para la aplicación: {appName}...");
 
-                string outputFile = Path.Combine(outputFolder, $"resultados_{appName}.csv");
+                // Normaliza el nombre de la aplicación eliminando caracteres no permitidos
+                // Normaliza el nombre del archivo, reemplaza espacios por guiones bajos
+                // y elimina caracteres no válidos para nombres de archivos
+                string safeAppName = new string(appName
+                    .Replace(' ', '_')
+                    .Normalize(NormalizationForm.FormD)
+                    .Where(c => !char.IsWhiteSpace(c) && CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                    .ToArray());
+
+                // Asegura que el nombre del archivo termina con ".csv"
+                if (!safeAppName.EndsWith(".csv"))
+                {
+                    safeAppName += ".csv";
+                }
+
+                string outputFile = Path.Combine(outputFolder, $"resultados_{safeAppName}");
                 string logParserPath = Path.Combine(AppContext.BaseDirectory, "tools", "LogParser.exe");
                 string logParserCommand = $"{logParserPath} \"SELECT date AS Fecha, time AS Hora, s-sitename AS Sitio, s-ip AS IP_Servidor, " +
-                              $"cs-method AS Metodo, cs-uri-stem AS Ruta, cs-uri-query AS Consulta_Ruta, s-port AS Puerto_Servidor, " +
-                              $"cs-username AS Usuario, c-ip AS IP_Cliente, cs(User-Agent) AS UserAgent, sc-status AS Estado_Respuesta, " +
-                              $"sc-substatus AS Subestado_Respuesta, sc-win32-status AS Estado_Win32 FROM {logPath}/*.log WHERE cs-uri-stem LIKE '%{appName}%'\" " +
-                              $"-i:IISW3C -o:CSV > {outputFile}";
+                               $"cs-method AS Metodo, cs-uri-stem AS Ruta, cs-uri-query AS Consulta_Ruta, s-port AS Puerto_Servidor, " +
+                               $"cs-username AS Usuario, c-ip AS IP_Cliente, cs(User-Agent) AS UserAgent, sc-status AS Estado_Respuesta, " +
+                               $"sc-substatus AS Subestado_Respuesta, sc-win32-status AS Estado_Win32 FROM {logPath}/*.log WHERE cs-uri-stem LIKE '%{appName}%'\" " +
+                               $"-i:IISW3C -o:CSV > {outputFile}";
+
 
                 // string logParserCommand = $"{logParserPath} \"SELECT date AS Fecha, time AS Hora, cs-uri-stem AS Ruta, sc-status AS Estado_Respuesta FROM {logPath} WHERE cs-uri-stem LIKE '%{appName}%'\" -i:IISW3C -o:CSV > {outputFile}";
 
