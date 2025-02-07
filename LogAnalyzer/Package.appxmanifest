@@ -9,8 +9,8 @@
 
   <Identity
     Name="17772504-541e-4a04-8721-a6002b230379"
-    Publisher="CN=asvargas"
-    Version="1.0.0.0" />
+    Publisher="CN=LogAnalyzer Dev Cert"
+    Version="1.0.4.0" />
 
   <mp:PhoneIdentity PhoneProductId="17772504-541e-4a04-8721-a6002b230379" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

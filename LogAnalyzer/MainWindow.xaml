@@ -16,7 +16,7 @@
             <TextBox x:Name="txtLogPath" PlaceholderText="C:\Rutas\Logs" />
 
             <TextBlock Text="Lista de Aplicaciones:" />
-            <TextBox x:Name="txtAppNames" PlaceholderText="App1, App2..." AcceptsReturn="True" Height="100" />
+            <TextBox x:Name="txtAppNames" PlaceholderText="App1&#10;App2&#10;AppN..." AcceptsReturn="True" Height="100" />
 
             <TextBlock Text="Carpeta de salida:" />
             <TextBox x:Name="txtOutputFolder" PlaceholderText="C:\Rutas\Salida" />

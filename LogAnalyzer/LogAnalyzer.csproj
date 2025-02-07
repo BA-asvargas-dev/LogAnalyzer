@@ -64,15 +64,5 @@
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
-    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
-    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundle>Auto</AppxBundle>
-    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
-    <AppInstallerUri>C:\Users\asvargas\source\repos\LogAnalyzer</AppInstallerUri>
-    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
 </Project>
